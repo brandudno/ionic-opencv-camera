@@ -122,7 +122,7 @@
 
       <ion-button mode="ios" (click)="signOut()" expand="block">Sign out</ion-button>
 
-      <ion-button mode="ios" expand="block">
+      <ion-button [routerLink]="['/results']"  mode="ios" expand="block">
         <ion-icon slot="start" name="camera"></ion-icon>
         Left Icon
       </ion-button>

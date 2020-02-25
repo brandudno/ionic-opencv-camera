@@ -169,7 +169,8 @@ ion-item {
     --highlight-height: 0;
     --inner-padding-end: 0;
     --ripple-color: transparent;
-    
+    --min-height: inherit;
+
     &:last-child {
         margin-bottom: 0;
     }
