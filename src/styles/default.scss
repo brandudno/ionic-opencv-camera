@@ -1,0 +1,297 @@
+/* Default styles */
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.h100 {
+    height: 100%;
+}
+
+.ion-container {
+    --background: var(--ion-color-seashell);
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    position: relative;
+}   
+
+.ion-container-full {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    --background: var(--ion-color-seashell);
+}
+
+ion-menu-button {
+    color: white;
+}
+
+ion-menu {
+    --ion-background-color: var(--ion-color-martinique);
+    --ion-text-color: white;
+
+    .menu-container {
+        margin: 0 auto;
+        display: block;
+        width: 226px;
+    }
+
+    &.ios {
+        .menu-container {
+            padding-top: constant(safe-area-inset-top);
+            padding-top: env(safe-area-inset-top);
+            margin-top: 13px;
+        }
+    }
+
+    .menu-icon {
+        width: 226px;
+        height: 36px;
+        opacity: 0.2;
+        margin-bottom: $doubleBottomMargin;
+    }
+
+    ion-item {
+        --min-height: initial !important;
+        --padding-start: 0 !important;
+        --padding-end: 0 !important;
+        border-radius: 0;
+        margin-bottom: 30px !important;
+
+        ion-label {
+            text-transform: uppercase;
+            font-size: 15px !important;
+            font-weight: 700 !important;
+            color: white !important;
+            margin: 0;
+        }
+
+        ion-icon {
+            width: 18px;
+            color: white !important;
+            margin: 0;
+            margin-right: 30px;
+        }
+
+    }
+
+    
+
+    ion-list {/* optional, but it needs when you use gradient as a background color.*/
+        background: transparent;
+    }
+}
+
+ion-footer {
+
+    ion-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+}
+
+ion-menu-button, ion-back-button {
+    --padding-bottom: 0;
+    --padding-end: 0;
+    --padding-start: 0;
+    --padding-top: 0;
+    width: 25px;
+    margin-left: 10px;
+}
+
+ion-back-button {
+    --color: white;
+    width: 16px;
+}
+
+ion-header {
+    .logo {
+        width: 269px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    ion-toolbar {
+        --padding-top: 8px;
+        --padding-bottom: 8px;
+    }
+
+}
+
+ion-toolbar {
+    --background: var(--ion-color-martinique);
+
+    ion-icon {
+        color: white;
+    }
+
+    * {
+        min-height: 50px;
+    }
+
+    ion-title {
+        color: white;
+        font-size: 18px;
+        line-height: 27px;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: $halfMargin 0;
+    }
+
+}
+
+ion-item {
+    margin-bottom: $bottomMargin;
+    --background: none;
+    --inner-border-width: 0;
+    --padding-bottom: 0;
+    --padding-end: 0;
+    --padding-start: 0;
+    --padding-top: 0;
+    --background-activated-opacity: 0;
+    --background-focused-opacity: 0;
+    --background-hover-opacity: 0;
+    clear: both;
+    --border-width: 0;
+    --highlight-height: 0;
+    --inner-padding-end: 0;
+    --ripple-color: transparent;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &.invalid-form-item {
+        margin-bottom: $validationErrorMargin;
+    }
+
+    &.validation-error-container {
+        --min-height: inherit;
+    }
+
+}
+
+ion-label {
+    --color: var(--ion-color-martinique) !important;
+    font-family: $brandFont !important;
+    font-size: 14px !important;
+    line-height: 21px;
+    margin-right: 10px;
+}
+
+ion-item-divider {
+    min-height: 1px !important;
+    --background: var(--ion-color-alto);
+    height: 1px;
+    margin-bottom: $bottomMargin;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+ion-list {
+    width: 100%;
+    background: none !important;
+    padding: 0 !important;
+
+    ion-item {
+        --min-height: initial !important;
+    }
+
+}
+
+div[scrollx=true],div[scrolly=true] {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: $bottomMargin;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    ion-img {
+        height: auto;
+        width: 136px;
+        margin-right: 16px;
+        flex: 0 0 auto;  
+    }
+
+    ion-thumbnail {
+        height: 136px;
+        width: 136px;
+        margin-right: 16px;
+        flex: 0 0 auto;
+    }
+
+}
+
+div[scrollx=true] {
+    overflow-x: auto;
+}
+
+div[scrolly=true] {
+    overflow-y: auto;
+}
+
+.vertical-align {
+    height: 100%;
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+}
+
+.central-container {
+    width: 246px;
+    margin: 0 auto;
+
+    .logo {
+        width: 228px;
+        height: 136px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: $bottomMargin;
+    }
+
+}
+
+.alternative-rows {
+    --ion-grid-padding: 0;
+
+    ion-row {
+        background: white;
+        border-top: 1px solid $seashell;
+        border-bottom: 1px solid $martinique;
+        outline: none;
+
+        &:nth-child(even) {
+            background: $seashell;
+        }
+    }
+
+    ion-col {
+        --ion-grid-column-padding: 16px;
+        position: relative;
+
+        p {
+            margin-bottom: 0;
+            color: $martinique;
+        }
+
+    }
+
+}

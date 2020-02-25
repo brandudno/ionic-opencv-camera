@@ -1,0 +1,15 @@
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Custom Survey IT styling */
+@import "styles/mix-ins.scss";
+@import "styles/colours.scss";
+@import "styles/margins.scss";
+@import "styles/typography.scss";
+@import "styles/forms.scss";
+@import "styles/buttons.scss";
+@import "styles/default.scss";

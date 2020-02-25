@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+$brandFont: 'Open Sans', sans-serif;
+
+* {
+    font-family: $brandFont;
+}
+
+p {
+    margin: 0;
+    margin-bottom: $bottomMargin;
+    color: var(--ion-color-martinique);
+    font-size: 14px;
+    line-height: 19px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+}
+
+.validation-error {
+    color: $monza;
+    float: left;
+    width: 100%;
+}
+
+.success-message {
+    color: $atlantis;
+    float: left;
+    width: 100%;
+}
+
+strong {
+    font-weight: 700;
+}
+
+h1 { 
+    margin: 0;
+    margin-bottom: $bottomMargin;
+    color: var(--ion-color-martinique);
+    font-size: 30px;
+    line-height: 40px; 
+    font-weight: 700;
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: $bottomMargin;
+    color: var(--ion-color-atlantis);
+    font-size: 16px;
+    line-height: 24px; 
+    font-weight: 600;
+}
+
+.txt {
+
+    &_central {
+        text-align: center;
+    }
+
+    &_left {
+        text-align: left;
+    }
+
+    &_right {
+        text-align: right;
+    }
+
+}

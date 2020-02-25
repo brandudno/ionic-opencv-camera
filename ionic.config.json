@@ -1,0 +1,7 @@
+{
+  "name": "project_reader_app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
