@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
+import { StorageService } from 'src/app/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ui',
@@ -19,6 +21,8 @@ export class UiPage implements OnInit {
   public token: String;
 
   constructor(
+    private storageService: StorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,6 +33,12 @@ export class UiPage implements OnInit {
       'radio': this.radio,
       'startDate': this.startDate
     });
+  }
+
+  public signOut(): void {
+    this.storageService.signOut().subscribe(() => {
+      this.router.navigate(["/login"]);
+    })
   }
 
   public submitForm(): void {
