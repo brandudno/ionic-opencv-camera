@@ -17,8 +17,8 @@ export class StorageService {
     return from(this.storage.get('authToken'));
   }
 
-  public setAuthToken(authToken: String): Observable<string> {
-    return from(this.storage.set('authToken', "AUTH_TOKEN"));
+  public setAuthToken(authToken: any): Observable<string> {
+    return from(this.storage.set('authToken', authToken));
   }
 
   public clearStorage(): Observable<any> {

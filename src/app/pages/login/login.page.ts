@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AuthenticationForm } from 'src/app/models/forms/authentication-form.model';
 import { StorageService } from 'src/app/services/storage.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,13 @@ export class LoginPage implements OnInit {
 
     this.authService.authenticate(this.authenticationForm.username.value, this.authenticationForm.password.value).subscribe(
       (response) => {
-        this.storageService.setAuthToken("AUTH_TOKEN").subscribe(() => {
+        let currentDateTime: Date = new Date();
+        let authJSON = {
+          "authToken": "AUTH_TOKEN",
+          "dateLoggedIn": currentDateTime
+        }
+
+        this.storageService.setAuthToken(authJSON).subscribe(() => {
           this.isLoggingIn = false;
           this.authenticationForm.formGroup.reset();
           this.router.navigate(['/camera']);        
