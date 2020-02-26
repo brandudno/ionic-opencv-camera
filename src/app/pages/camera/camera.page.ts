@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
+import { CameraPreviewService } from 'src/app/services/camera-preview.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-camera',
@@ -10,8 +10,8 @@ import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, Camer
 export class CameraPage implements OnInit {
 
   constructor(
-    private cameraPreview: CameraPreview,
-    private screenOrientation: ScreenOrientation
+    private cameraService: CameraPreviewService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -19,26 +19,13 @@ export class CameraPage implements OnInit {
   }
 
   public startCamera(): void {
-    const cameraPreviewOpts: CameraPreviewOptions = {
-      camera: 'rear',
-      tapPhoto: false,
-      previewDrag: true,
-      toBack: true,
-      alpha: 1
-    }
-
-    this.cameraPreview.startCamera(cameraPreviewOpts);
+    this.cameraService.startCamera().subscribe();
   }
 
   public takePicture(): void {
-    const pictureOpts: CameraPreviewPictureOptions = {
-      width: 1280,
-      height: 1280,
-      quality: 85
-    }
-
-    this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
+    this.cameraService.takePicture().subscribe((imageData) => {
       console.log('data:image/jpeg;base64,' + imageData);
+      this.router.navigate(['/results']);
     }, (err) => {
       console.log(err);
     });
