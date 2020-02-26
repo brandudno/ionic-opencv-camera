@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
         this.storageService.setAuthToken("AUTH_TOKEN").subscribe(() => {
           this.isLoggingIn = false;
           this.authenticationForm.formGroup.reset();
-          this.router.navigate(['/ui']);        
+          this.router.navigate(['/camera']);        
         });
       },
       (error) => {

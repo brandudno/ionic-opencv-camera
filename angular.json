@@ -49,7 +49,9 @@
                 "src/styles"
               ]
             },
-            "scripts": []
+            "scripts": [
+              "src/assets/opencv/asm/3.4/opencv.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './services/guards/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'ui', pathMatch: 'full' },
+  { path: '', redirectTo: 'camera', pathMatch: 'full' },
   {
     path: 'ui',
     loadChildren: () => import('./pages/ui/ui.module').then( m => m.UiPageModule), 
@@ -15,7 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'results',
-    loadChildren: () => import('./pages/results/results.module').then( m => m.ResultsPageModule)
+    loadChildren: () => import('./pages/results/results.module').then( m => m.ResultsPageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'camera',
+    loadChildren: () => import('./pages/camera/camera.module').then( m => m.CameraPageModule),
+    canActivate: [AuthGuardService]
   },
 ];
 

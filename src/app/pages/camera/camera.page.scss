@@ -1,0 +1,12 @@
+html, ion-content {
+    background-color: transparent;
+    --background: transparent;
+}   
+
+ion-button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    z-index: 100000;
+}

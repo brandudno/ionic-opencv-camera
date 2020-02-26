@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="project.reader.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Project Reader App</name>
+<widget id="app.pk.reader.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>LFD Reader</name>
     <description>Project Reader App</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="contact@averment.digital" href="http://averment.digital">Averment</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -99,5 +99,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <allow-navigation href="http://localhost:8100" sessionid="d85b1179" />
+    <plugin name="cordova-sqlite-storage" spec="~4.0.0" />
+    <plugin name="cordova-plugin-camera" spec="~4.1.0" />
+    <allow-navigation href="http://localhost:8100" sessionid="c7ba0f9e" />
 </widget>
