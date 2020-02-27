@@ -1,5 +1,5 @@
 <ion-content [ngClass]="{'camera-ready': cameraReady}">
-  <ion-button (click)="takePicture()" mode="ios" shape="round">
+  <ion-button *ngIf="cameraReady" (click)="takePicture()" mode="ios" shape="round">
     <ion-icon slot="icon-only" name="camera"></ion-icon>
   </ion-button>
 </ion-content>

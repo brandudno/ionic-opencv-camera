@@ -1,11 +1,9 @@
 @import "mix-ins";
 
 ion-content {
-    opacity: 0;
-    @include transition(opacity);
+    --background: black;
 
     &.camera-ready {
-        opacity: 1;
         --background: transparent;
     }
 
