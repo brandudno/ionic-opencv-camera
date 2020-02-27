@@ -1,6 +1,14 @@
-html, ion-content {
-    background-color: transparent;
-    --background: transparent;
+@import "mix-ins";
+
+ion-content {
+    opacity: 0;
+    @include transition(opacity);
+
+    &.camera-ready {
+        opacity: 1;
+        --background: transparent;
+    }
+
 }   
 
 ion-button {
@@ -9,4 +17,37 @@ ion-button {
     transform: translateY(-50%) rotate(90deg);
     left: 20px;
     z-index: 100000;
+}
+
+.image-processing, .camera-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    z-index: 100000;
+    width: 100%;
+
+    ion-spinner {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    p {
+        font-size: 30px;
+        line-height: 30px;
+        color: white;
+        margin: 0;
+        font-weight: 700;
+    }
+
+}
+
+.image-processing {
+
+    ion-spinner {
+        margin-bottom: 20px;
+    }
+
 }

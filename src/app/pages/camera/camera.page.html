@@ -1,5 +1,14 @@
-<ion-content>
+<ion-content [ngClass]="{'camera-ready': cameraReady}">
   <ion-button (click)="takePicture()" mode="ios" shape="round">
     <ion-icon slot="icon-only" name="camera"></ion-icon>
   </ion-button>
 </ion-content>
+
+<div *ngIf="processingImage" class="image-processing">
+  <ion-spinner name="crescent"></ion-spinner>
+  <p class="txt_central">Processing image...</p>
+</div>
+
+<div *ngIf="!cameraReady" class="camera-loading">
+  <ion-spinner name="crescent"></ion-spinner>
+</div>

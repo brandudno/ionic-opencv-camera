@@ -23,6 +23,10 @@ export class CameraPreviewService {
     return from(this.cameraPreview.startCamera(cameraPreviewOpts));
   }
 
+  public stopCamera(): Observable<any> {
+    return from(this.cameraPreview.stopCamera());
+  }
+
   public takePicture(): Observable<any> {
     const pictureOpts: CameraPreviewPictureOptions = {
       width: 1280,
