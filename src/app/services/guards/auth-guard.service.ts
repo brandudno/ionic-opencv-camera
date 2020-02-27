@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { StorageService } from '../storage.service';
-import { formatDate } from '@angular/common';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,33 +20,24 @@ export class AuthGuardService {
         this.router.navigate(["login"]);
       }
 
-      this.checkTimeSignedInFor(authToken.dateLoggedIn);
+      let userBeenLoggedInOver12Hours = this.hasUserBeenLoggedInOver12Hours(authToken.dateLoggedIn);
+
+      if(userBeenLoggedInOver12Hours) {
+        this.storageService.signOut().subscribe(() => {
+          this.router.navigate(["login"]);
+        });
+
+        return false;
+      }
 
       return authToken != null;
     });
   }
 
-  public checkTimeSignedInFor(dateLoggedIn: Date): void {
-    let loggedInDate = new Date(dateLoggedIn);
-    let eventEndTime = new Date();
-    let differenceInMilliseconds = eventEndTime.valueOf() - loggedInDate.valueOf();
-    let differenceInHours = this.convertMSToHours(differenceInMilliseconds);
+  public hasUserBeenLoggedInOver12Hours(dateLoggedIn: Date): Boolean {
+    let timeSinceLogin = moment.duration({ from: dateLoggedIn, to: moment() });
+    let userBeenLoggedInOver12Hours = timeSinceLogin.asHours() >= 12;
 
-    if(differenceInHours >= 12) {
-      this.storageService.signOut().subscribe(() => {
-        this.router.navigate(["login"]);
-      });
-    }
-  }
-
-  public convertMSToHours(milliseconds: number): number {
-    let hour, minute, seconds;
-    seconds = Math.floor(milliseconds / 1000);
-    minute = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-    hour = Math.floor(minute / 60);
-    minute = minute % 60;
-    hour = hour % 24;
-    return hour;
+    return userBeenLoggedInOver12Hours;
   }
 }
