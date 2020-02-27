@@ -29,6 +29,10 @@ export class StorageService {
     return from(this.storage.set('imageResults', imageResults));
   }
 
+  public clearStoredResults(): Observable<any> {
+    return from(this.storage.set('imageResults', null));
+  }
+
   public clearStorage(): Observable<any> {
     return from(this.storage.clear());
   }

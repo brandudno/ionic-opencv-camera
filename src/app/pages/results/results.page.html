@@ -9,28 +9,36 @@
 
 <ion-content class="ion-container">
 
+  <div *ngIf="!imageResults?.success">
+    <ion-item>
+      <h1 class="txt_central">Sorry!</h1>
+    </ion-item>
+
+    <ion-item>
+      <p class="txt_central error-message margin-bottom"><strong>This is an error message to say something is in an error state.</strong></p>
+    </ion-item>
+  </div>
+
+  <div *ngIf="imageResults?.success">
+
+    <ion-item>
+      <h1 class="txt_central">LFD Analysis results</h1>
+    </ion-item>
   
+    <ion-item>
+      <img src="data:image/png;base64,{{imageResults?.image}}" alt="Image Results">
+    </ion-item>
+  
+    <ion-item>
+      <h1 class="txt_central">{{imageResults?.results}} ug/ml</h1>
+    </ion-item>
+  
+    <ion-item>
+      <p class="txt_central margin-bottom"><Strong>Date &amp; Time: </Strong>{{todaysDateAndTime}}</p>
+    </ion-item>
 
-  <ion-item>
-    <h1 class="txt_central">LFD Analysis results</h1>
-  </ion-item>
+  </div>
 
-  <ion-item>
-    <img src="data:image/png;base64,{{imageResults?.image}}" alt="Image Results">
-  </ion-item>
-
-  <ion-item>
-    <h1 class="txt_central">100 ug/ml</h1>
-  </ion-item>
-
-  <ion-item>
-    <p class="txt_central"><Strong>Date &amp; Time: </Strong>21/02/2020</p>
-  </ion-item>
-
-  <ion-item>
-    <p class="txt_central"><Strong>Batch: </Strong>123456</p>
-  </ion-item>
-
-  <ion-button mode="ios" [routerLink]="['/camera']" expand="block">Scan</ion-button>
+  <ion-button mode="ios" (click)="clearResultsAndNavigateToCamera()" expand="block">Scan</ion-button>
 
 </ion-content>

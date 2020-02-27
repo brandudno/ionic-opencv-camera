@@ -1,4 +1,5 @@
 @import "mix-ins";
+@import "margins";
 
 ion-content {
     --background: black;
@@ -45,7 +46,7 @@ ion-button {
 .image-processing {
 
     ion-spinner {
-        margin-bottom: 20px;
+        margin-bottom: $bottomMargin;
     }
 
 }
