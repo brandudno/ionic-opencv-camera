@@ -1,5 +1,6 @@
 import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { CameraPreviewService } from 'src/app/services/camera-preview.service';
+import { Network } from '@ionic-native/network/ngx';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,14 +14,17 @@ export class CameraPage implements OnInit {
 
   constructor(
     private cameraService: CameraPreviewService,
-    private router: Router
+    private router: Router,
+    private network: Network
   ) { }
 
   ngOnInit() {
     this.startCamera();
+    this.checkNetwork();
   }
 
   ionViewWillEnter() {
+    
     setTimeout(() => {
       this.cameraReady = true;
     }, 1000);
@@ -28,6 +32,10 @@ export class CameraPage implements OnInit {
 
   ionViewWillLeave() {
     this.cameraReady = false;
+  }
+
+  public checkNetwork(): void {
+    if(this.network.type !== "none") alert("Warning: You have no network connection");
   }
 
   public startCamera(): void {

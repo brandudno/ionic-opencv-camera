@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera/ngx';
 import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     Camera,
     CameraPreview,
     ScreenOrientation,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

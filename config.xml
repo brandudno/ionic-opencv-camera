@@ -105,5 +105,5 @@
     <plugin name="cordova-plugin-ios-camera-permissions" spec="~1.2.0" />
     <plugin name="cordova-plugin-camera-preview" spec="~0.11.2" />
     <plugin name="cordova-plugin-screen-orientation" spec="~3.0.2" />
-    <allow-navigation href="http://172.20.10.3:8100" sessionid="0648a8b9" />
+    <allow-navigation href="http://172.20.10.3:8100" sessionid="ae0777e0" />
 </widget>
