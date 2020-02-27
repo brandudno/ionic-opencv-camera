@@ -13,12 +13,14 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 
+    HttpClientModule,
     IonicModule.forRoot(), 
     IonicStorageModule.forRoot(),
     AppRoutingModule

@@ -2,6 +2,8 @@ import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@ang
 import { CameraPreviewService } from 'src/app/services/camera-preview.service';
 import { Network } from '@ionic-native/network/ngx';
 import { Router } from '@angular/router';
+import { ResultsService } from 'src/app/services/results.service';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'app-camera',
@@ -14,8 +16,9 @@ export class CameraPage implements OnInit {
 
   constructor(
     private cameraService: CameraPreviewService,
-    private router: Router,
-    private network: Network
+    private network: Network,
+    private resultsService: ResultsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -50,11 +53,20 @@ export class CameraPage implements OnInit {
     this.cameraService.takePicture().subscribe((imageData) => {
       this.processingImage = false;
       this.cameraReady = false;
-      console.log('data:image/jpeg;base64,' + imageData);
-      this.router.navigate(['/results']);
+      
+      this.postResults(imageData);
     }, (err) => {
       this.processingImage = false;
-      console.log(err);
+      alert("Something went wrong, please try again");
+    });
+  }
+
+  public postResults(imageData: String[]): void {
+    _.map(imageData, (image) => {
+      this.resultsService.postResults(image).subscribe((imageResults) => {
+        console.log(imageResults);
+        //this.router.navigateByUrl('/results');
+      })
     });
   }
 }
