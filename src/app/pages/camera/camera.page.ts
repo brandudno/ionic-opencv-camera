@@ -4,6 +4,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { Router } from '@angular/router';
 import { ResultsService } from 'src/app/services/results.service';
 import { _ } from 'underscore';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-camera',
@@ -18,7 +19,8 @@ export class CameraPage implements OnInit {
     private cameraService: CameraPreviewService,
     private network: Network,
     private resultsService: ResultsService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -64,8 +66,9 @@ export class CameraPage implements OnInit {
   public postResults(imageData: String[]): void {
     _.map(imageData, (image) => {
       this.resultsService.postResults(image).subscribe((imageResults) => {
-        console.log(imageResults);
-        //this.router.navigateByUrl('/results');
+        this.storageService.storeResults(imageResults).subscribe(() => {
+          this.router.navigateByUrl('/results');
+        });
       })
     });
   }

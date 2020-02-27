@@ -21,6 +21,14 @@ export class StorageService {
     return from(this.storage.set('authToken', authToken));
   }
 
+  public getStoredResults(): Observable<String> {
+    return from(this.storage.get('imageResults'));
+  }
+
+  public storeResults(imageResults: any): Observable<string> {
+    return from(this.storage.set('imageResults', imageResults));
+  }
+
   public clearStorage(): Observable<any> {
     return from(this.storage.clear());
   }
