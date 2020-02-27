@@ -19,8 +19,12 @@ export class CameraPreviewService {
       toBack: true,
       alpha: 1
     }
-
     return from(this.cameraPreview.startCamera(cameraPreviewOpts));
+  }
+
+  public turnFlashOn(): Observable<any> {
+    this.cameraPreview.setFlashMode("torch");
+    return from(this.cameraPreview.getFlashMode());
   }
 
   public stopCamera(): Observable<any> {

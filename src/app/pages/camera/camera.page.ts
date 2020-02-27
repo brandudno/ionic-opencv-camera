@@ -19,27 +19,29 @@ export class CameraPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.startCamera();
-    this.checkNetwork();
   }
 
   ionViewWillEnter() {
-    
+    this.startCamera();
     setTimeout(() => {
       this.cameraReady = true;
     }, 1000);
   }
 
   ionViewWillLeave() {
+    this.cameraService.stopCamera().subscribe();
     this.cameraReady = false;
   }
 
   public checkNetwork(): void {
-    if(this.network.type !== "none") alert("Warning: You have no network connection");
+    if(this.network.type == "none") alert("Warning: You have no network connection");
   }
 
   public startCamera(): void {
-    this.cameraService.startCamera().subscribe();
+    this.checkNetwork();
+    this.cameraService.startCamera().subscribe(() => {
+      this.cameraService.turnFlashOn().subscribe();
+    });
   }
 
   public takePicture(): void {
