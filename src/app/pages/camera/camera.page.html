@@ -2,6 +2,8 @@
   <ion-button *ngIf="cameraReady" (click)="takePicture()" mode="ios" shape="round">
     <ion-icon slot="icon-only" name="camera"></ion-icon>
   </ion-button>
+
+  <canvas id="canvasOutput"></canvas>
 </ion-content>
 
 <div *ngIf="processingImage" class="image-processing">

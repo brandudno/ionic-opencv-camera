@@ -17,7 +17,7 @@ export class CameraPreviewService {
       tapPhoto: false,
       previewDrag: true,
       toBack: true,
-      alpha: 1
+      alpha: 1,
     }
     return from(this.cameraPreview.startCamera(cameraPreviewOpts));
   }
@@ -33,8 +33,6 @@ export class CameraPreviewService {
 
   public takePicture(): Observable<any> {
     const pictureOpts: CameraPreviewPictureOptions = {
-      width: 1280,
-      height: 1280,
       quality: 85
     };
     

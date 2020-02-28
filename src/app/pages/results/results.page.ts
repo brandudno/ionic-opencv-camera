@@ -28,7 +28,6 @@ export class ResultsPage implements OnInit {
 
   public getResults(): void {
     this.storageService.getStoredResults().subscribe((results) => {
-      console.log(results);
       this.imageResults = results;
     });
   }
