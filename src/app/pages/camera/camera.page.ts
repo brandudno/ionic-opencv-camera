@@ -63,7 +63,7 @@ export class CameraPage implements OnInit {
 
       setTimeout(() => {
         this.processImageAnalysis(element);
-      }, 1000);
+      }, 200);
     });
   }
 
