@@ -33,7 +33,7 @@ export class CameraPreviewService {
 
   public takePicture(): Observable<any> {
     const pictureOpts: CameraPreviewPictureOptions = {
-      quality: 85
+      quality: 30
     };
     
     return from(this.cameraPreview.takePicture(pictureOpts));

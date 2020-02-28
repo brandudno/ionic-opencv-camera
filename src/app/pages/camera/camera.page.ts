@@ -51,9 +51,9 @@ export class CameraPage implements OnInit {
       this.cameraService.turnFlashOn().subscribe();
     });
 
-    // setInterval(() => {
-    //   this.takePicture();
-    // }, 200)
+    setInterval(() => {
+      this.takePicture();
+    }, 200);
   }
 
   public takePicture(): void {
@@ -68,27 +68,27 @@ export class CameraPage implements OnInit {
   }
 
   private processImageAnalysis(element) {
-      var src = cv.imread(element);
-      var copy = src.clone();
-      let dst = new cv.Mat();
-      let contours = new cv.MatVector();
-      let hierarchy = new cv.Mat();
-      let color = new cv.Scalar(0, 255, 0);
-      cv.cvtColor(src, src, cv.COLOR_BGR2GRAY, 0);
-      cv.bilateralFilter(src, dst, 7, 50, 50, cv.BORDER_DEFAULT);
-      cv.Canny(dst, dst, 8, 250, 3, false);
-      cv.findContours(dst, contours, hierarchy, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE);
-      cv.cvtColor(dst, src, cv.COLOR_GRAY2BGR, 0);
-      for (let i = 0; i < contours.size(); ++i) {
-        let cnt = contours.get(i);
-        let area = cv.contourArea(cnt, false);
-        console.log(area);
-        if (area > 2000) {
-          cv.drawContours(src, contours, i, color, 1, cv.LINE_8, hierarchy, 1);
-        }
+    var src = cv.imread(element);
+    var copy = src.clone();
+    let dst = new cv.Mat();
+    let contours = new cv.MatVector();
+    let hierarchy = new cv.Mat();
+    let color = new cv.Scalar(0, 255, 0);
+    cv.cvtColor(src, src, cv.COLOR_BGR2GRAY, 0);
+    cv.bilateralFilter(src, dst, 7, 50, 50, cv.BORDER_DEFAULT);
+    cv.Canny(dst, dst, 8, 250, 3, false);
+    cv.findContours(dst, contours, hierarchy, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE);
+    cv.cvtColor(dst, src, cv.COLOR_GRAY2BGR, 0);
+    for (let i = 0; i < contours.size(); ++i) {
+      let cnt = contours.get(i);
+      let area = cv.contourArea(cnt, false);
+      console.log(area);
+      if (area > 2000) {
+        cv.drawContours(src, contours, i, color, 1, cv.LINE_8, hierarchy, 1);
       }
-      cv.imshow('canvasOutput', src);
-      src.delete(); dst.delete();
+    }
+    cv.imshow('canvasOutput', src);
+    src.delete(); dst.delete();
   }
 
   // public takePicture(): void {
