@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 import { ResultsService } from 'src/app/services/results.service';
 import { _ } from 'underscore';
 import { StorageService } from 'src/app/services/storage.service';
+import { Platform } from '@ionic/angular';
 
 declare var cv: any;
+declare var cordova;
 
 @Component({
   selector: 'app-camera',
@@ -17,16 +19,19 @@ export class CameraPage implements OnInit {
   public processingImage: Boolean = false;
   public cameraReady: Boolean = false;
   public takenImage: String;
+  public videoSrc;
 
   constructor(
     private cameraService: CameraPreviewService,
     private network: Network,
     private resultsService: ResultsService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private platform: Platform
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    
   }
 
   ionViewWillEnter() {
@@ -37,7 +42,7 @@ export class CameraPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.cameraService.stopCamera().subscribe();
+    // this.cameraService.stopCamera().subscribe();
     this.cameraReady = false;
   }
 
@@ -45,50 +50,76 @@ export class CameraPage implements OnInit {
     if(this.network.type == "none") alert("Warning: You have no network connection");
   }
 
-  public startCamera(): void {
+  public async startCamera() {
     this.checkNetwork();
-    this.cameraService.startCamera().subscribe(() => {
-      this.cameraService.turnFlashOn().subscribe();
-    });
+    
+    const videoConstraints = { 
+      audio: false, 
+      video: {
+        facingMode: 'environment',
+        width: {
+          min: 1280,
+          ideal: 1920,
+          max: 2560,
+        },
+        height: {
+          min: 720,
+          ideal: 1080,
+          max: 1440
+        },
+      }
+    };
 
-    setInterval(() => {
-      this.takePicture();
-    }, 200);
+    const video = document.querySelector('video');
+
+    if (this.platform.is('ios') && this.platform.is('cordova')) {
+
+      cordova.plugins.iosrtc.getUserMedia(videoConstraints).then((stream) => {
+          video.srcObject = stream;
+
+          setInterval(() => {
+            this.processImageAnalysis(video);
+          }, 100);
+        }
+      );
+
+    } else {
+      const stream = await navigator.mediaDevices.getUserMedia(videoConstraints);
+      video.srcObject = stream;
+
+      setInterval(() => {
+        this.processImageAnalysis(video);
+      }, 100);
+    }
+
+    
   }
 
-  public takePicture(): void {
-    this.cameraService.takePicture().subscribe((imageData) => {
-      const element = document.createElement('img');
-      element.src = 'data:image/jpg;base64,' + imageData;
+  // public takePicture(): void {
+  //   this.cameraService.takePicture().subscribe((imageData) => {
+  //     const element = document.createElement('img');
+  //     element.src = 'data:image/jpg;base64,' + imageData;
 
-      setTimeout(() => {
-        this.processImageAnalysis(element);
-      }, 200);
-    });
-  }
+  //     setTimeout(() => {
+  //       this.processImageAnalysis(element);
+  //     }, 200);
+  //   });
+  // }
 
-  private processImageAnalysis(element) {
-    var src = cv.imread(element);
-    var copy = src.clone();
+  private processImageAnalysis(video) {
+    var canvas = document.createElement('canvas');
+    canvas.getContext('2d').drawImage(video, 0, 0, window.outerWidth, window.outerHeight);
+
+    var src = cv.imread(canvas);
     let dst = new cv.Mat();
-    let contours = new cv.MatVector();
-    let hierarchy = new cv.Mat();
-    let color = new cv.Scalar(0, 255, 0);
+
     cv.cvtColor(src, src, cv.COLOR_BGR2GRAY, 0);
     cv.bilateralFilter(src, dst, 7, 50, 50, cv.BORDER_DEFAULT);
-    cv.Canny(dst, dst, 8, 250, 3, false);
-    cv.findContours(dst, contours, hierarchy, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE);
-    cv.cvtColor(dst, src, cv.COLOR_GRAY2BGR, 0);
-    for (let i = 0; i < contours.size(); ++i) {
-      let cnt = contours.get(i);
-      let area = cv.contourArea(cnt, false);
-      console.log(area);
-      if (area > 2000) {
-        cv.drawContours(src, contours, i, color, 1, cv.LINE_8, hierarchy, 1);
-      }
-    }
-    cv.imshow('canvasOutput', src);
-    src.delete(); dst.delete();
+    cv.Canny(src, dst, 8, 250, 3, false);
+
+    cv.imshow('canvasOutput', dst);
+    src.delete(); dst.delete(); 
+    
   }
 
   // public takePicture(): void {
