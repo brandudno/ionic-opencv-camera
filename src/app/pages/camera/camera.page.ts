@@ -1,9 +1,10 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__, ViewChild, ElementRef } from '@angular/core';
 import { Network } from '@ionic-native/network/ngx';
 import { Router } from '@angular/router';
 import { _ } from 'underscore';
 import { Platform } from '@ionic/angular';
 
+declare var window: any;
 declare var cv: any;
 declare var cordova;
 
@@ -16,7 +17,12 @@ export class CameraPage implements OnInit {
   public processingImage: Boolean = false;
   public cameraReady: Boolean = false;
   public takenImage: String;
-  public videoSrc;
+
+  @ViewChild("video", {static: false})
+    public video: ElementRef;
+
+  @ViewChild("canvas", {static: false})
+  public canvas: ElementRef;
 
   constructor(
     private network: Network,
@@ -63,34 +69,44 @@ export class CameraPage implements OnInit {
       }
     };
 
-    const video = document.querySelector('video');
-
     if (this.platform.is('ios') && this.platform.is('cordova')) {
 
       cordova.plugins.iosrtc.getUserMedia(videoConstraints).then((stream) => {
-          video.srcObject = stream;
-
+          this.video.nativeElement.srcObject = stream;
+          
           setInterval(() => {
-            this.processImageAnalysis(video);
-          }, 100);
+            this.processImageAnalysis();
+          }, 300);
+          
         }
       );
 
     } else {
       const stream = await navigator.mediaDevices.getUserMedia(videoConstraints);
-      video.srcObject = stream;
+      this.video.nativeElement.srcObject = stream;
 
       setInterval(() => {
-        this.processImageAnalysis(video);
-      }, 100);
+        this.processImageAnalysis();
+      }, 0);
     }
-
-    
   }
 
-  private processImageAnalysis(video) {
+  public capture() {
+    this.canvas.nativeElement.width = this.video.nativeElement.offsetWidth;
+    this.canvas.nativeElement.height = this.video.nativeElement.offsetHeight;
+    this.canvas.nativeElement.getContext('2d').drawImage(
+      this.video.nativeElement,
+      0, 0,
+      this.canvas.nativeElement.offsetWidth, this.video.nativeElement.offsetHeight);  
+
+    return this.canvas.nativeElement;
+  }
+
+  private processImageAnalysis() {
+    //var capture = this.capture();
+
     var canvas = document.createElement('canvas');
-    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    canvas.getContext('2d').drawImage(this.video.nativeElement, 0, 0, canvas.width, canvas.height);
 
     var src = cv.imread(canvas);
     let dst = new cv.Mat();
@@ -100,7 +116,6 @@ export class CameraPage implements OnInit {
     cv.Canny(src, dst, 8, 250, 3, false);
 
     cv.imshow('canvasOutput', dst);
-    src.delete(); dst.delete(); 
-    
+    src.delete(); dst.delete();
   }
 }

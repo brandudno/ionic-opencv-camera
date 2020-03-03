@@ -3,9 +3,10 @@
 </div> 
 
 <ion-content [ngClass]="{'camera-ready': cameraReady}">  
+  <canvas id="canvasInput" #canvas></canvas>
   <canvas id="canvasOutput"></canvas>
 
   <div class="video-stream-container">
-    <video autoplay id="videoFeed"></video>
+    <video autoplay id="videoFeed" #video></video>
   </div>
 </ion-content>
