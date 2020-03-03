@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="app.pk.reader.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>PK Reader</name>
-    <description>Project Reader App</description>
+    <name>Open CV - Ionic Camera</name>
+    <description>Open CV - Ionic Camera</description>
     <author email="contact@averment.digital" href="http://averment.digital">Averment</author>
     <content original-src="index.html" src="http://172.20.10.3:8100" />
     <access origin="*" />

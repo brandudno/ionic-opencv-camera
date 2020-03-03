@@ -1,28 +1,8 @@
-<!-- <ion-content [ngClass]="{'camera-ready': cameraReady}">
-  <ion-button *ngIf="cameraReady" (click)="takePicture()" mode="ios" shape="round">
-    <ion-icon slot="icon-only" name="camera"></ion-icon>
-  </ion-button>
-  <video autoplay (click)="switchCamera()" id="videoFeed">
-    <source [src]="videoSrc">
-  </video>
-  <canvas id="canvasOutput"></canvas>
-</ion-content>
--->
-
-<div *ngIf="processingImage" class="image-processing">
-  <ion-spinner name="crescent"></ion-spinner>
-  <p class="txt_central">Processing image...</p>
-</div>
-
 <div *ngIf="!cameraReady" class="camera-loading">
   <ion-spinner name="crescent"></ion-spinner>
 </div> 
 
-<ion-content [ngClass]="{'camera-ready': cameraReady}">
-  <ion-button *ngIf="cameraReady" (click)="takePicture()" mode="ios" shape="round">
-    <ion-icon slot="icon-only" name="camera"></ion-icon>
-  </ion-button>
-  
+<ion-content [ngClass]="{'camera-ready': cameraReady}">  
   <canvas id="canvasOutput"></canvas>
 
   <div class="video-stream-container">

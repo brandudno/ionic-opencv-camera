@@ -1,10 +1,7 @@
 import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
-import { CameraPreviewService } from 'src/app/services/camera-preview.service';
 import { Network } from '@ionic-native/network/ngx';
 import { Router } from '@angular/router';
-import { ResultsService } from 'src/app/services/results.service';
 import { _ } from 'underscore';
-import { StorageService } from 'src/app/services/storage.service';
 import { Platform } from '@ionic/angular';
 
 declare var cv: any;
@@ -22,11 +19,8 @@ export class CameraPage implements OnInit {
   public videoSrc;
 
   constructor(
-    private cameraService: CameraPreviewService,
     private network: Network,
-    private resultsService: ResultsService,
     private router: Router,
-    private storageService: StorageService,
     private platform: Platform
   ) { }
 
@@ -42,7 +36,6 @@ export class CameraPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    // this.cameraService.stopCamera().subscribe();
     this.cameraReady = false;
   }
 
@@ -95,17 +88,6 @@ export class CameraPage implements OnInit {
     
   }
 
-  // public takePicture(): void {
-  //   this.cameraService.takePicture().subscribe((imageData) => {
-  //     const element = document.createElement('img');
-  //     element.src = 'data:image/jpg;base64,' + imageData;
-
-  //     setTimeout(() => {
-  //       this.processImageAnalysis(element);
-  //     }, 200);
-  //   });
-  // }
-
   private processImageAnalysis(video) {
     var canvas = document.createElement('canvas');
     canvas.getContext('2d').drawImage(video, 0, 0, window.outerWidth, window.outerHeight);
@@ -120,30 +102,5 @@ export class CameraPage implements OnInit {
     cv.imshow('canvasOutput', dst);
     src.delete(); dst.delete(); 
     
-  }
-
-  // public takePicture(): void {
-  //   this.processingImage = true;
-
-  //   this.cameraService.takePicture().subscribe((imageData) => {
-  //     this.processingImage = false;
-  //     this.cameraReady = false;
-      
-  //     this.postResults(imageData);
-  //   }, (err) => {
-  //     this.processingImage = false;
-  //     alert("Something went wrong, please try again");
-  //   });
-  // }
-
-  public postResults(imageData: String[]): void {
-    _.map(imageData, (image) => {
-      console.log(image);
-      this.resultsService.postResults(image).subscribe((imageResults) => {
-        this.storageService.storeResults(imageResults).subscribe(() => {
-          this.router.navigateByUrl('/results');
-        });
-      })
-    });
   }
 }
