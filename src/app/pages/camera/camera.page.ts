@@ -103,12 +103,9 @@ export class CameraPage implements OnInit {
   }
 
   private processImageAnalysis() {
-    //var capture = this.capture();
+    this.canvas.nativeElement.getContext('2d').drawImage(this.video.nativeElement, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
 
-    var canvas = document.createElement('canvas');
-    canvas.getContext('2d').drawImage(this.video.nativeElement, 0, 0, canvas.width, canvas.height);
-
-    var src = cv.imread(canvas);
+    var src = cv.imread(this.canvas.nativeElement);
     let dst = new cv.Mat();
 
     cv.cvtColor(src, src, cv.COLOR_BGR2GRAY, 0);
