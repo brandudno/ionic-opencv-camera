@@ -3,7 +3,7 @@
     <name>Open CV - Ionic Camera</name>
     <description>Open CV - Ionic Camera</description>
     <author email="contact@averment.digital" href="http://averment.digital">Averment</author>
-    <content original-src="index.html" src="http://172.20.10.3:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

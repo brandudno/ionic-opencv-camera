@@ -90,7 +90,7 @@ export class CameraPage implements OnInit {
 
   private processImageAnalysis(video) {
     var canvas = document.createElement('canvas');
-    canvas.getContext('2d').drawImage(video, 0, 0, window.outerWidth, window.outerHeight);
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
     var src = cv.imread(canvas);
     let dst = new cv.Mat();
